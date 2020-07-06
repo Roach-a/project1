@@ -2,9 +2,10 @@ package com.cskaoyan.project1.service;
 
 import com.cskaoyan.project1.dao.AdminDao;
 import com.cskaoyan.project1.dao.AdminDaoImpl;
-import com.cskaoyan.project1.model.bo.Admin;
+import com.cskaoyan.project1.model.Admin;
 import com.cskaoyan.project1.model.bo.AdminAddBO;
 import com.cskaoyan.project1.model.bo.AdminLoginBO;
+import com.cskaoyan.project1.model.bo.AdminSearchBO;
 
 import java.util.List;
 
@@ -45,5 +46,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public boolean updateAdminss(Admin admin) {
         return adminDao.updateAdminss(admin);
+    }
+
+    @Override
+    public List<Admin> getSearchAdmins(AdminSearchBO adminSearchBO) {
+        admin.setNickname(adminSearchBO.getNickname());
+        admin.setEmail(adminSearchBO.getEmail());
+        return adminDao.getSearchAdmins(admin);
     }
 }

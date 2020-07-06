@@ -1,6 +1,6 @@
 package com.cskaoyan.project1.dao;
 
-import com.cskaoyan.project1.model.bo.Admin;
+import com.cskaoyan.project1.model.Admin;
 
 import java.util.List;
 
@@ -16,4 +16,6 @@ public interface AdminDao {
     Admin getAdminsInfo(int id);
 
     boolean updateAdminss(Admin admin);
+
+    List<Admin> getSearchAdmins(Admin admin);
 }

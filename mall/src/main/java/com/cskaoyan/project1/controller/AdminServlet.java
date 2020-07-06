@@ -1,15 +1,15 @@
 package com.cskaoyan.project1.controller;
 
 import com.cskaoyan.project1.model.Result;
-import com.cskaoyan.project1.model.bo.Admin;
+import com.cskaoyan.project1.model.Admin;
 import com.cskaoyan.project1.model.bo.AdminAddBO;
 import com.cskaoyan.project1.model.bo.AdminLoginBO;
+import com.cskaoyan.project1.model.bo.AdminSearchBO;
 import com.cskaoyan.project1.model.vo.AdminLoginVO;
 import com.cskaoyan.project1.service.AdminService;
 import com.cskaoyan.project1.service.AdminServiceImpl;
 import com.cskaoyan.project1.utils.HttptUtils;
 import com.google.gson.Gson;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class AdminServlet extends HttpServlet {
     private AdminService adminService = new AdminServiceImpl();
     Gson gson = new Gson();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("执行了doPost");
+        System.out.println("did doPost");
         //当前servle可以处理登陆、查询所有admin、删除admin等操作
         String requestURI = request.getRequestURI();
         String action = requestURI.replace("/api/admin/admin/","");
@@ -35,8 +35,29 @@ public class AdminServlet extends HttpServlet {
             addAdminss(request,response);
         } else if ("updateAdminss".equals(action)) {
             updateAdminss(request,response);
+        } else if ("getSearchAdmins".equals(action)) {
+            getSearchAdmins(request,response);
         }
     }
+
+    /**
+     * 简单多条件查询(底层使用动态sql思想)
+     * @param request
+     * @param response
+     */
+    private void getSearchAdmins(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String requestBody = HttptUtils.getRequestBody(request);
+        AdminSearchBO adminSearchBO = gson.fromJson(requestBody,AdminSearchBO.class);
+        List<Admin> data = adminService.getSearchAdmins(adminSearchBO);
+        response.getWriter().println(gson.toJson(Result.ok(data)));
+    }
+
+    /**
+     * 更新管理员信息
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     private void updateAdminss(HttpServletRequest request,HttpServletResponse response) throws IOException{
         String requestBody = HttptUtils.getRequestBody(request);
         Admin admin = gson.fromJson(requestBody,Admin.class);
@@ -89,7 +110,7 @@ public class AdminServlet extends HttpServlet {
     }
     //*****************************************************************************************************************************
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("执行了doGet");
+        System.out.println("did doGet");
         String requestURI = request.getRequestURI();
         String action = requestURI.replace("/api/admin/admin/","");
         if ("allAdmins".equals(action)) {

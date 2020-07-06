@@ -1,4 +1,4 @@
-package com.cskaoyan.project1.model.bo;
+package com.cskaoyan.project1.model;
 
 public class Admin {
     private Integer id;

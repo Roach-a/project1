@@ -18,7 +18,7 @@ public class HttptUtils {
             outputStream.write(bytes,0,length);
         }
         //字符串转为 java 对象
-        return outputStream.toString();
+        return outputStream.toString("utf-8");
 
     }
 }
