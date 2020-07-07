@@ -1,4 +1,4 @@
-package com.cskaoyan.project1.model.bo;
+package com.cskaoyan.project1.model.bo.goods;
 
 public class SpecBO {
     private String specName;

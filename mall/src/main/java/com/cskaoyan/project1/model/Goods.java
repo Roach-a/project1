@@ -1,7 +1,7 @@
 package com.cskaoyan.project1.model;
 
-import com.cskaoyan.project1.model.bo.GoodsAddBO;
-import com.cskaoyan.project1.model.bo.SpecBO;
+import com.cskaoyan.project1.model.bo.goods.GoodsAddBO;
+import com.cskaoyan.project1.model.bo.goods.SpecBO;
 
 public class Goods {
     private Integer id;
@@ -14,6 +14,17 @@ public class Goods {
 
     public Goods() {
     }
+
+    public Goods(Integer id, String img, String name, Double price, Integer typeId, Integer stockNum, String desc) {
+        this.id = id;
+        this.img = img;
+        this.name = name;
+        this.price = price;
+        this.typeId = typeId;
+        this.stockNum = stockNum;
+        this.desc = desc;
+    }
+
     public Goods(GoodsAddBO goodsAddBO) {
         this();
         setId(null);
@@ -84,5 +95,18 @@ public class Goods {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "id=" + id +
+                ", img='" + img + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", typeId=" + typeId +
+                ", stockNum=" + stockNum +
+                ", desc='" + desc + '\'' +
+                '}';
     }
 }

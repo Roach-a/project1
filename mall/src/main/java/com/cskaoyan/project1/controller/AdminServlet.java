@@ -2,9 +2,9 @@ package com.cskaoyan.project1.controller;
 
 import com.cskaoyan.project1.model.Result;
 import com.cskaoyan.project1.model.Admin;
-import com.cskaoyan.project1.model.bo.AdminAddBO;
-import com.cskaoyan.project1.model.bo.AdminLoginBO;
-import com.cskaoyan.project1.model.bo.AdminSearchBO;
+import com.cskaoyan.project1.model.bo.Admin.AdminAddBO;
+import com.cskaoyan.project1.model.bo.Admin.AdminLoginBO;
+import com.cskaoyan.project1.model.bo.Admin.AdminSearchBO;
 import com.cskaoyan.project1.model.vo.AdminLoginVO;
 import com.cskaoyan.project1.service.AdminService;
 import com.cskaoyan.project1.service.AdminServiceImpl;

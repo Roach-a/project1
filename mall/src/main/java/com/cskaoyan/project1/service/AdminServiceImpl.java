@@ -3,9 +3,9 @@ package com.cskaoyan.project1.service;
 import com.cskaoyan.project1.dao.AdminDao;
 import com.cskaoyan.project1.dao.AdminDaoImpl;
 import com.cskaoyan.project1.model.Admin;
-import com.cskaoyan.project1.model.bo.AdminAddBO;
-import com.cskaoyan.project1.model.bo.AdminLoginBO;
-import com.cskaoyan.project1.model.bo.AdminSearchBO;
+import com.cskaoyan.project1.model.bo.Admin.AdminAddBO;
+import com.cskaoyan.project1.model.bo.Admin.AdminLoginBO;
+import com.cskaoyan.project1.model.bo.Admin.AdminSearchBO;
 
 import java.util.List;
 

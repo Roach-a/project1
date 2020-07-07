@@ -1,6 +1,6 @@
 package com.cskaoyan.project1.model;
 
-import com.cskaoyan.project1.model.bo.SpecBO;
+import com.cskaoyan.project1.model.bo.goods.SpecBO;
 
 public class Spec {
     private Integer id;
@@ -11,7 +11,15 @@ public class Spec {
 
     public Spec() {
     }
-    public Spec(SpecBO specBO,Integer goodsId) {
+
+    public Spec(String specName, Integer stockNum, Double unitPrice, Integer goodsId) {
+        this.specName = specName;
+        this.stockNum = stockNum;
+        this.unitPrice = unitPrice;
+        this.goodsId = goodsId;
+    }
+
+    public Spec(SpecBO specBO, Integer goodsId) {
         this();
         setId(null);
         setSpecName(specBO.getSpecName());

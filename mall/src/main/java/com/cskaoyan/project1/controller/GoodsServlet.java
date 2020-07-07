@@ -3,8 +3,11 @@ package com.cskaoyan.project1.controller;
 import com.alibaba.druid.util.StringUtils;
 import com.cskaoyan.project1.model.Result;
 import com.cskaoyan.project1.model.Type;
-import com.cskaoyan.project1.model.bo.GoodsAddBO;
-import com.cskaoyan.project1.model.bo.TypeBO;
+import com.cskaoyan.project1.model.bo.goods.*;
+import com.cskaoyan.project1.model.bo.message.ReplyBO;
+import com.cskaoyan.project1.model.vo.GoodsInfoEditVO;
+import com.cskaoyan.project1.model.vo.MessageNoReplyVO;
+import com.cskaoyan.project1.model.vo.MessageRepliedVO;
 import com.cskaoyan.project1.model.vo.TypeGoodsVO;
 import com.cskaoyan.project1.service.GoodsService;
 import com.cskaoyan.project1.service.GoodsServiceImpl;
@@ -36,7 +39,47 @@ public class GoodsServlet extends HttpServlet {
             addGoods(request,response);
         }else if ("addType".equals(action)) {
             addType(request,response);
+        } else if ("updateGoods".equals(action)) {
+            updateGoods(request,response);
+        } else if ("addSpec".equals(action)){
+            addSpec(request,response);
+        } else if ("deleteSpec".equals(action)) {
+            deleteSpec(request,response);
+        } else if ("reply".equals(action)) {
+            reply(request,response);
         }
+    }
+    //回复消息
+    private void reply(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String requestBody = HttptUtils.getRequestBody(request);
+        ReplyBO replyBO = gson.fromJson(requestBody,ReplyBO.class);
+        goodsService.reply(replyBO);
+        response.getWriter().println(gson.toJson(Result.ok()));
+    }
+
+    //更改商品信息的时候删除规格
+    private void deleteSpec(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String requestBody = HttptUtils.getRequestBody(request);
+        EditDeletSpecBO deletSpecBO = gson.fromJson(requestBody,EditDeletSpecBO.class);
+        goodsService.deleteSpec(deletSpecBO);
+        response.getWriter().println(gson.toJson(Result.ok()));
+    }
+    //!!!!无法解决当添加时用户输入全为空的数据问题（此时前端卡顿）
+    //更改商品信息时候的添加规格
+    private void addSpec(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String requestBody = HttptUtils.getRequestBody(request);
+        EditAddSpecBO editAddSpecBO = gson.fromJson(requestBody, EditAddSpecBO.class);
+        boolean res = goodsService.addSpec(editAddSpecBO);
+        if (res)response.getWriter().println(gson.toJson(Result.ok()));
+        else response.getWriter().println(gson.toJson(Result.error("插入失败，重复数据")));
+    }
+
+    //更改商品信息
+    private void updateGoods(HttpServletRequest request,HttpServletResponse response) throws IOException{
+        String requestBody = HttptUtils.getRequestBody(request);
+        GoodsEditComfirmBO comfirmBO = gson.fromJson(requestBody,GoodsEditComfirmBO.class);
+        goodsService.updateGoods(comfirmBO);
+        response.getWriter().println(gson.toJson(Result.ok()));
     }
 
     /**
@@ -85,7 +128,53 @@ public class GoodsServlet extends HttpServlet {
             getType(request,response);
         } else if ("getGoodsByType".equals(action)) {
             getGoodsBuType(request,response);
+        } else if ("getGoodsInfo".equals(action)) {
+            getGoodsInfo(request,response);
+        } else if ("deleteGoods".equals(action)){
+            deleteGoods(request,response);
+        } else if ("noReplyMsg".equals(action)) {
+            noReplyMsg(request,response);
+        } else if ("repliedMsg".equals(action)) {
+            repliedMsg(request,response);
+        } else if ("deleteType".equals(action)) {
+            deleteType(request,response);
         }
+    }
+    //删除类目，（订单删除待完成，删除商品（评论，订单），删除类目）
+    private void deleteType(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        Integer typeId = Integer.valueOf(request.getParameter("typeId"));
+        goodsService.deleteType(typeId);
+        response.getWriter().println(gson.toJson(Result.ok()));
+    }
+
+    //返回已留言列表
+    private void repliedMsg(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<MessageRepliedVO> messageRepliedVOList = goodsService.repliedMsg();
+        response.getWriter().println(gson.toJson(Result.ok(messageRepliedVOList)));
+    }
+
+    //返回未留言列表
+    private void noReplyMsg(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<MessageNoReplyVO> messageNoReplyVOList = goodsService.noReplyMsg();
+        response.getWriter().println(gson.toJson(Result.ok(messageNoReplyVOList)));
+    }
+
+    //删除某个商品
+    private void deleteGoods(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int id = Integer.valueOf(request.getParameter("id"));
+        goodsService.deleteGoods(id);
+        response.getWriter().println(gson.toJson(Result.ok()));
+    }
+
+    /**
+     * 根据id获取商品信息
+     * @param request
+     * @param response
+     */
+    private void getGoodsInfo(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        int id = StringUtils.stringToInteger(request.getParameter("id"));
+        GoodsInfoEditVO goodsInfo = goodsService.getGoodsInfo(id);
+        response.getWriter().println(gson.toJson(Result.ok(goodsInfo)));
     }
 
     /**

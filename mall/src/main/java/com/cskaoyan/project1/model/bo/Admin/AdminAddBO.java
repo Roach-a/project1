@@ -1,8 +1,12 @@
-package com.cskaoyan.project1.model.bo;
+package com.cskaoyan.project1.model.bo.Admin;
 
-public class AdminSearchBO {
+public class AdminAddBO {
     private String email;
     private String nickname;
+    private String pwd;
+
+    public AdminAddBO() {
+    }
 
     public String getEmail() {
         return email;
@@ -18,5 +22,13 @@ public class AdminSearchBO {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 }

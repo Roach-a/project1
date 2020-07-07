@@ -1,6 +1,4 @@
-package com.cskaoyan.project1.model.bo;
-
-import com.cskaoyan.project1.model.Spec;
+package com.cskaoyan.project1.model.bo.goods;
 
 import java.util.List;
 
