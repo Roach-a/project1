@@ -1,7 +1,7 @@
 package com.cskaoyan.project1.model;
 
-import com.cskaoyan.project1.model.bo.goods.GoodsAddBO;
-import com.cskaoyan.project1.model.bo.goods.SpecBO;
+import com.cskaoyan.project1.model.bo.backstage.goods.GoodsAddBO;
+import com.cskaoyan.project1.model.bo.backstage.goods.SpecBO;
 
 public class Goods {
     private Integer id;

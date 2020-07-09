@@ -58,4 +58,6 @@ public class Result {
     public static Result error(String message) {
         return new Result(10000,message);
     }
+
+
 }

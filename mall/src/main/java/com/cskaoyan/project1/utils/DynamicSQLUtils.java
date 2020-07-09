@@ -2,7 +2,7 @@ package com.cskaoyan.project1.utils;
 
 import com.alibaba.druid.util.StringUtils;
 import com.cskaoyan.project1.model.Admin;
-import com.cskaoyan.project1.model.bo.orders.OrdersSearchBO;
+import com.cskaoyan.project1.model.bo.backstage.orders.OrdersSearchBO;
 
 import java.util.ArrayList;
 import java.util.HashMap;

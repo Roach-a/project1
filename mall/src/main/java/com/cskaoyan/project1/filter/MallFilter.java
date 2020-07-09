@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter("/api/admin/*")
-public class AdminFilter implements Filter {
+@WebFilter("/api/mall/*")
+public class MallFilter implements Filter {
     public void destroy() {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        System.out.println("did AdminFilter");
+        System.out.println("did MallFilter");
         HttpServletRequest request = (HttpServletRequest)req;
         HttpServletResponse response = (HttpServletResponse)resp;
         //解决跨域问题
@@ -31,13 +31,13 @@ public class AdminFilter implements Filter {
 
         Admin admin = (Admin)request.getSession().getAttribute("admin");
         //1.需要拦截哪些，需要拦截的，判断有无session数据
-        if (auth(request)){//需要拦截
-            if (admin == null){
-                response.getWriter().println(new Gson().toJson(Result.error("错误，无权访问此页面")));
-                //response.getWriter().println(Result.error("错误，无权访问此页面"));
-                return;
-            }
-        }
+//        if (auth(request)){//需要拦截
+//            if (admin == null){
+//                response.getWriter().println(new Gson().toJson(Result.error("错误，无权访问此页面")));
+//                //response.getWriter().println(Result.error("错误，无权访问此页面"));
+//                return;
+//            }
+//        }
 
         chain.doFilter(request, response);
 

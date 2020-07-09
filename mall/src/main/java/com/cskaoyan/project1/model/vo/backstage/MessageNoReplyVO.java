@@ -1,32 +1,25 @@
-package com.cskaoyan.project1.model;
+package com.cskaoyan.project1.model.vo.backstage;
 
-import com.cskaoyan.project1.model.bo.backstage.message.ReplyBO;
+import com.cskaoyan.project1.model.Message;
 
-public class Message {
+public class MessageNoReplyVO {
     private Integer id;
     private Integer userId;
     private Integer goodsId;
     private String content;
-    private String replyContent;
     private Integer state;
     private String createtime;
+    private Message_goodsVO goods;
+    private Message_userVO user;
 
-    public Message() {
+    public MessageNoReplyVO(Message message) {
+        this.id = message.getId();
+        this.userId = message.getUserId();
+        this.goodsId = message.getGoodsId();
+        this.content = message.getContent();
+        this.state = message.getState();
+        this.createtime = message.getCreatetime();
     }
-
-    public Message(ReplyBO replyBO) {
-        this.id = replyBO.getId();
-        this.replyContent = replyBO.getContent();
-    }
-
-    public String getReplyContent() {
-        return replyContent;
-    }
-
-    public void setReplyContent(String replyContent) {
-        this.replyContent = replyContent;
-    }
-
 
     public Integer getId() {
         return id;
@@ -74,5 +67,21 @@ public class Message {
 
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
+    }
+
+    public Message_goodsVO getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Message_goodsVO goods) {
+        this.goods = goods;
+    }
+
+    public Message_userVO getUser() {
+        return user;
+    }
+
+    public void setUser(Message_userVO user) {
+        this.user = user;
     }
 }
